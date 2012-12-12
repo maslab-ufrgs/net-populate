@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<edges xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:noNamespaceSchemaLocation="http://sumo.sf.net/xsd/edges_file.xsd">
+	<edge id="north/center" from="north" to="center" type="b"/>
+	<edge id="center/north" from="center" to="north" type="c"/>
+
+    <edge id="south/center" from="south" to="center" type="c"/>
+    <edge id="center/south" from="center" to="south" type="c"/>
+
+    <edge id="east/center" from="east" to="center" type="c"/>
+    <edge id="center/east" from="center" to="east" type="c"/>
+
+    <edge id="west/center" from="west" to="center" type="c"/>
+	<edge id="center/west" from="center" to="west" type="c"/>
+
+    <edge id="se/center" from="southeast" to="center" type="c"/>
+    <edge id="center/nw" from="center" to="northwest" type="c"/>
+</edges>
+

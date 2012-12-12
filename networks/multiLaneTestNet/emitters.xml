@@ -1,0 +1,24 @@
+<emitters>
+	<!-- single-edge emitters -->
+	<emitter laneId="north/center_0" start="0" interval="10" />
+	<emitter laneId="north/center_1" start="5" interval="10" />
+	
+	<emitter laneId="center/north_0" start="0" interval="10" />
+	<emitter laneId="south/center_0" start="0" interval="10" />
+	<emitter laneId="center/south_0" start="0" interval="10" />
+	<emitter laneId="east/center_0" start="0" interval="10" />
+	<emitter laneId="center/east_0" start="0" interval="10" />
+	<emitter laneId="west/center_0" start="0" interval="10" />
+	<emitter laneId="center/west_0" start="0" interval="10" /> 
+	<emitter laneId="se/center_0" start="0" interval="10" />
+	<emitter laneId="center/nw_0" start="0" interval="10" />
+
+	
+	<!-- routed emitters
+	<emitter laneId="north/center_1" arrivalEdge="center/south" start="5" interval="10" />
+	<emitter laneId="south/center_0" arrivalEdge="center/north" start="0" interval="10" />
+	<emitter laneId="east/center_0" arrivalEdge="center/west" start="0" interval="10" />
+	<emitter laneId="west/center_0" arrivalEdge="center/east" start="0" interval="10" /> 
+	<emitter laneId="se/center_0" arrivalEdge="center/nw" start="0" interval="10" />
+	-->
+</emitters>
