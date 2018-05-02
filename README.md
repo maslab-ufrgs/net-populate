@@ -179,7 +179,7 @@ o método writeOutput() deverá ser chamado. O uso desses métodos é descrito a
 Onde net é o objeto sumolib.net.Net que representa a rede de tráfego,
 outputFile é o arquivo .rou.xml que pode ser gerado ao final e exclude
 é o prefixo dos veículos que não são reinseridos
-(ver parâmetro -x da chamada na seção **Funcionamento e uso**.
+(ver parâmetro -x da chamada na seção **Funcionamento e uso**).
 
   - Método act()
   
@@ -210,58 +210,39 @@ pode ser carregado no SUMO como demanda auxiliar.
 
 ##### Funcionamento e uso
 
-O VehicleEmitter recebe como entrada um arquivo xml com as definições
-dos emissores de veículos, se conecta ao SUMO via TraCI e emite veículos
-de acordo com as definições do arquivo de entrada.
+O ODKeeper se conecta ao SUMO via TraCI e mantém o número de veículos durante a simulação.
+Quando um veículo é removido normalmente da simulação, o ODKeeper insere
+outro com origem e destino determinados por uma matriz OD informada.
 
-O arquivo de definição de emissores tem a seguinte estrutura:
+É possível fazer o ODKeeper ignorar a saída de alguns veículos,
+controlando apenas um conjunto específico. Isso é útil para evitar que um veículo da demanda
+principal seja reinserido, de modo que apenas a demanda auxiliar seja controlada.
 
-    <emitters>
-        <!-- single-edge emitters -->
-        <emitter laneId="e1_0" start="0" end="150" interval="10" />
-        <emitter laneId="e1_1" start="5" interval="10" />
-        ...
+Para usar o ODKeeper, o seguinte comando deve ser executado no
+diretório <path_to_netpopulate>/src/odpopulator, assumindo
+se que o SUMO está carregando um arquivo .rou.xml qualquer e
+espera uma conexão vai TraCI na porta <PORT>:
 
-        <!-- routed vehicle emitters -->
-        <emitter laneId="e1_1" arrivalEdge="e2" start="5" interval="10" />
-        <emitter laneId="e2_0" arrivalEdge="e3" start="0" interval="10" />
-        ...
-    </emitters>
-
-Os atributos da tag emitter são descritos a seguir:
-
-  - **laneId**: é o ID da lane (não da edge) onde o emissor irá gerar veículos
-  - **start**: (default=0) em qual timestep o emissor começará a atuar
-  - **end**: (default=0) em qual timestep a emissão deve parar
-  - **interval**: de quantos em quantos timesteps um veículo deve ser emitido
-  - **arrivalEdge**: (opcional) se omitido, o veículo termina a viagem na
-                 mesma edge onde foi criado. Se fornecido, uma rota é
-                 calculada até a edge de destino e o veículo vai até ela. 
-
-
-Para executar o Emitter, o seguinte comando deve ser
-executado no diretório <path_to_netpopulate>/src,
-assumindo-se que o SUMO espera uma conexão vai TraCI na porta <PORT>:
-
-    $ python main.py [parametros]
+    $ python odkeeper.py [parametros]
 
 Onde os parametros são:
 
-    -h, --help:                     exibe todos os parâmetros aceitos pelo LoadKeeper.
-    -n NETFILE, --net-file=NETFILE: arquivo .net.xml com a rede de tráfego onde o emissor atuará
-    --emitters-input=EMITTERSINPUT: arquivo .xml de definição dos emissores
-    -p PORT, --port=PORT:           porta da conexão via TraCI 
+    -h, --help:                               exibe todos os parâmetros aceitos pelo ODKeeper.
+    -n NETFILE, --net-file=NETFILE:           arquivo .net.xml com a rede de tráfego onde a demanda será controlada
+    -t TAZFILE, --taz-file=TAZFILE:           arquivo .taz.xml com a definição dos distritos da rede viária
+    -m ODMFILE, --odm-file=ODMFILE:           arquivo com a matriz OD, i.e., as definições das viagens entre os distritos
+    -d NUMVEH, --driver-number=NUMVEH:        número máximo de veículos ao mesmo tempo na rede de tráfego (não reinsere um veículo que terminou viagem se o número de veículos na rede for superior a este máximo)
+    -l MAX_PER_TS, --limit-per-ts=MAX_PER_TS: número máximo de veículos a ser inserido na simulação a cada timestep
+    -b BEGIN, --begin=BEGIN:                  timestep de início da atuação do ODKeeper
+    -e END, --end=END:                        timestep de fim da atuação do ODKeeper
+    -p PORT, --port=PORT:                     porta da conexão via TraCI
+    -x EXCLUDE, --exclude=EXCLUDE:            não reinsere veículos cujos ID's tenham o prefixo EXCLUDE. 
 
-Opções de logging:
+##### Instanciação da classe
 
-    --log.level=LOGLEVEL: (opcional) nível de detalhe das mensagens registradas, pode ser DEBUG, INFO, WARNING, ERROR or CRITICAL [default: INFO]
-    --log.file=FILE:      (opcional) arquivo onde as mensagens de log serão escritas
-    --log.stdout:         (opcional, ativado por padrão) escrever as mensagens de log no stream de saída padrão a.k.a. o terminal.
-    --log.stderr:         (opcional) escrever as mensagens de log no stream de erros padrão 
-
-Para que o Emitter seja executado em paralelo a algum experimento,
-o TraciHub deve ser executado, conectando-se a ele o Emitter, o script
-do experimento e o SUMO. 
+O ODKeeper pode ser importado para seu projeto de experimentos.
+Para usá-lo, um objeto do tipo ODKeeper deverá ser criado e, a cada timestep,
+seu método act() deve ser chamado. 
 
 #### ODLoader
 
