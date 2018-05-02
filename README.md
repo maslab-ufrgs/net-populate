@@ -19,10 +19,10 @@ python instalado (ele foi testado no python 2.7.3).
 
 ## Organização dos arquivos
 
-O sub-projeto NetPopulate possui a seguinte estrutura de diretórios:
+O sub-projeto **NetPopulate** possui a seguinte estrutura de diretórios:
 
   - *lib* - contém arquivos que auxiliam o cálculo de rotas
-  - *networks* - redes de tráfego usadas em testes do NetPopulate
+  - *networks* - redes de tráfego usadas em testes do **NetPopulate**
   - *testnet* - rede simples com um cruzamento e ruas de uma faixa
   - *multilaneTestNet* - rede simples com um cruzamento e ruas de mais de uma faixa.
                          Também possui um arquivo de exemplo de definição de emissores para o VehicleEmitter. 
@@ -59,8 +59,7 @@ será chamado de <path_to_netpopulate> a partir daqui.
 
 ### DemandKeeper
 
-O DemandKeeper faz parte do projeto NetPopulate. Trata-se de
-um utilitário que se conecta ao SUMO via TraCI e evita que
+Trata-se de um utilitário que se conecta ao SUMO via TraCI e evita que
 veículos saiam da simulação. Quando um veículo chega na sua edge de
 destino, o DemandKeeper lhe atribui uma nova rota para que ele continue trafegando. 
 
