@@ -14,12 +14,14 @@ o NetPopulate é composto pelos seguintes utilitários (segue uma breve descriç
                     na rede até atingi-la
   - **VehicleEmitter**: emite veículos em intervalos constantes de tempo
 
-**ATENÇÃO**: os scripts do **NetPopulate** necessitam do interpretador
-python instalado (ele foi testado no python 2.7.3). 
+**ATENÇÃO** 
+  - os scripts do **NetPopulate** necessitam do interpretador
+python instalado (ele foi testado no python 2.7.3) 
+  - Assume-se que o usuário está familiarizado com o SUMO e sua arquitetura TraCI.
 
 ## Organização dos arquivos
 
-O sub-projeto **NetPopulate** possui a seguinte estrutura de diretórios:
+O projeto **NetPopulate** possui a seguinte estrutura de diretórios:
 
   - *lib* - contém arquivos que auxiliam o cálculo de rotas
   - *networks* - redes de tráfego usadas em testes do **NetPopulate**
@@ -69,8 +71,6 @@ script principal do experimento e o DemandKeeper.
 
 #### Funcionamento e uso
 
-Assume-se que o usuário está familiarizado com o SUMO e sua arquitetura TraCI.
-
 O DemandKeeper se conecta ao SUMO via TraCI e previne que os
 veículos saiam da simulação. Quando qualquer veículo chega em sua edge
 de destino, o DemandKeeper calcula um novo destino e rota para este veículo,
@@ -108,9 +108,6 @@ da simulação, o LoadKeeper insere outro. Os veículos inseridos são armazenad
 e ao final um arquivo .rou.xml é gerado e pode ser carregado no SUMO como demanda auxiliar. 
 
 #### Funcionamento e uso
-
-Assume-se que o usuário está familiarizado com
-o SUMO e sua arquitetura TraCI.
 
 O LoadKeeper se conecta ao SUMO via TraCI e mantém o número de veículos
 durante a simulação. Quando um veículo é removido normalmente da simulação,
@@ -175,9 +172,9 @@ seu método act() deve ser chamado. Ao final, se for necessário escrever o
 arquivo .rou.xml que o LoadKeeper inseriu na simulação,
 o método writeOutput() deverá ser chamado. O uso desses métodos é descrito a seguir:
 
-    Construtora do LoadKeeper: 
+- Construtora do LoadKeeper: 
 
-loadkeeper = LoadKeeper(net, outputFile = None, exclude = None)
+        loadkeeper = LoadKeeper(net, outputFile = None, exclude = None)
 
 Onde net é o objeto sumolib.net.Net que representa a rede de tráfego,
 outputFile é o arquivo .rou.xml que pode ser gerado ao final e exclude
@@ -212,8 +209,6 @@ armazenados e ao final um arquivo .rou.xml é gerado e
 pode ser carregado no SUMO como demanda auxiliar. 
 
 ##### Funcionamento e uso
-
-Assume-se que o usuário está familiarizado com o SUMO e sua arquitetura TraCI.
 
 O VehicleEmitter recebe como entrada um arquivo xml com as definições
 dos emissores de veículos, se conecta ao SUMO via TraCI e emite veículos
@@ -277,9 +272,6 @@ de acordo com uma matriz OD. O ODLoader registra quando um veículo entra
 na simulação e então gera um .rou.xml com os dados dos veículos que entraram.
 
 ##### Funcionamento e uso
-
-Assume-se que o usuário está familiarizado
-com o SUMO e sua arquitetura TraCI.
 
 O ODLoader se conecta ao SUMO via TraCI e insere veículos na rede
 viária até se atingir a carga desejada. É possível configurar uma duração
